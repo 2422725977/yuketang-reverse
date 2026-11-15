@@ -23,23 +23,59 @@
 
 完整字段级证据、错误码、RVA 表与接口全表见 [report/雨课堂_逆向分析报告.md](report/雨课堂_逆向分析报告.md)。
 
+## 深化板块（§13–§22）
+
+| 章节 | 板块 | 一句话结论 |
+| --- | --- | --- |
+| §13 | A WebSocket | 端点 `wss://<host>/wsapp/`，**握手不带鉴权**，鉴权靠首帧 `hello`；信封 `{op,lessonid,msgid?}`，明文 JSON；入站无签名校验；学生侧 86 op / 教师侧 62 op |
+| §14 | B 云侧 H5 | 18 个 H5 全由 `DataUtil::getJournalH5Url` 生成、经 `getWebViewPageWidget` 打开；抓包入口是 PC SSO 包装 `/pc/webview_sso?session_id=&sid=&next=`；**无成绩型 H5** |
+| §15 | C JS 桥 | 桥名唯一 `JsCallFlutter`，4 个 dispatcher；信任边界极松（无签名/nonce/来源校验）；高危 `getTokenData`（接受 H5 传入的 OSS 凭证）、`getAliOssConfig`、`bind_other_env`（可重绑后端） |
+| §16 | D 文件直传 | OSS 凭证全部服务端下发，客户端无本地密钥；**对象 Key 客户端可自定**（本地文件名，无 sanitize），Bucket/Endpoint 硬编码；考试抓拍走七牛 |
+| §17 | E 原生层 | Manifest 显式放行明文流量；**无证书锁定、无自定义信任逻辑、无商业加固**；packagist 级反调试 0；Deeplink 接受 `app://yuketang` 与 `https://www.xuetangx.com/rain` |
+| §18 | — | 新增实验组与判定脚本表（W/A/H/C/D/B 组） |
+| §19 | — | 本轮 unverified 清单 |
+| §20 | F 路由/环境/域名 | 28 条路由、29 个域（含测试族 envning）、**4 个后端重绑出口**（其中 deeplink 与 JS 桥运行期可达且无白名单） |
+| §21 | G 学习时长心跳 | `POST /mobile-app/video-log/heartbeat/`，22 字段全客户端构造（`ts` 本地时钟、`sp` 播放位置），**无服务端时钟校准**；失败落 `heartbeat.db` 补传 |
+| §22 | H 监考与反作弊 | action 码封闭 `{16,20,24,60,62,64,96}` 且全部客户端驱动、无第二来源；光速检测只有 3 条规则、**无 frida/xposed 关键字**，且 `schemaVersion` Java=1 vs Dart=2 → **action 96 不可达**；截屏判定是 MediaStore 启发式 |
+
 ## 仓库结构
 
 ```
-report/   雨课堂_逆向分析报告.md        # 主交付物：12 章，全部结论标注 observed/inferred/unverified
-hooks/    ykt_hooks.js                 # 25 个只读观测挂点（含 4 字节 guard，防版本错配误挂）
-          ykt_checkin_probe.js         # 签到专项取证：请求侧 8 点 + 响应侧 5 点，JSONL 落盘
-          README.md                    # 挂点表、A-G / E0-E4 / B0-B4 实验表、加载命令
-replay/   checkin_replay.sh            # 四种签到端点重放（plain|web|loc-get|loc-submit|all）
+report/   雨课堂_逆向分析报告.md        # 主交付物：22 章（§1-§12 主分析，§13-§22 深化板块），全部标注 observed/inferred/unverified
+          _board_ws.md                 # 板块 A：WebSocket 协议（出站/入站 op 全表、信封、重连）
+          _board_h5.md                 # 板块 B：云侧 H5 路径全表与归属（355 条路径 / 18 个 H5）
+          _board_jsbridge.md           # 板块 C：JS 桥 4 个 dispatcher 与 action 全表
+          _board_upload.md             # 板块 D：作业/考试文件直传链路（OSS/七牛）
+          _board_native.md             # 板块 E：原生层 Manifest / TLS 姿态 / Deeplink
+          _board_surface.md            # 板块 F：28 条路由 / 29 个域名 / 4 个重绑入口
+          _board_heartbeat.md          # 板块 G：学习时长心跳面（22 字段 / 本地队列）
+          _board_proctor.md            # 板块 H：考试监考与反作弊全枚举
+hooks/    ykt_hooks.js                 # 25 个只读观测挂点（四模块主面）
+          ykt_checkin_probe.js         # 签到专项取证：请求侧 8 点 + 响应侧 5 点
+          ykt_ws_probe.js              # WebSocket 双向帧（7 点，自包含 Dart 解码）
+          ykt_bridge_probe.js          # H5 桥 / H5 URL 生成 / Deeplink（12 点）
+          ykt_beat_probe.js            # 学习时长心跳（8 点）
+          ykt_proctor_probe.js         # 监考与反作弊（10 点）
+          README.md                    # 6 个探针的挂点表、A-G / E0-E4 / B0-B4 / T0-T5 / P0-P3 实验表
+replay/   ykt_client.py                # 会话客户端（cookie 轮换 / 100000 重登录码 / 内建 WS 客户端）
+          ykt_scenarios.py             # 35 个场景（E/A/B/H/C/D/W 八组）
+          checkin_replay.sh            # 四种签到端点重放（plain|web|loc-get|loc-submit|all）
           checkin_diff.py              # 两次实验的响应字段差异对比（白名单键）
-          bind_replay.sh               # 身份绑定 B0-B4 实验（状态/学校库/写入/裁决点）
-tools/    kwscan.py                    # libapp.so 字节级字符串扫描（UTF-16LE 中文可命中）
+          bind_replay.sh               # 身份绑定 B0-B4 实验
+          README.md                    # 两工具用法与会话语义
+tools/    guard_audit.py               # 审计全部探针的挂点 guard（当前 75 点 / 0 不一致）
+          ws_lits.py / ws_proc.py / ws_inbound*.py / ws_model*.py   # WS op 与模型字段提取
+          h5paths.py / h5callers.py    # H5 路径提取与调用点归属
+          javascan.py / manifest_export.py  # Java 层关键词扫描 / Manifest exported 组件表
+          kwscan.py                    # libapp.so 字节级字符串扫描（UTF-16LE 中文可命中）
           u16scan.py                   # UTF-16LE 字符串批量导出
           addr_extract*.py / sig*.py   # 从 blutter 反汇编提取函数 RVA、签名、prologue guard 字节
           verify_prologue.py           # capstone 校验文件偏移处的指令与 asm 是否逐条一致
           fj_guard.py                  # 反编译产物完整性辅助
-artifacts/ paths.txt                   # 从样本中提取的接口路径全集（156 条）
-          dartfiles.txt                # Dart 源码路径全集（2880 条），用于确认"模块是否存在"
+artifacts/ paths.txt                   # 接口路径全集（156 条）
+          dartfiles.txt                # Dart 源码路径全集（2880 条）
+          h5paths.txt / h5paths_lits.txt / h5asm_ctx.txt / h5callers*.txt  # H5 路径与调用点原始清单
+          guards.txt                   # 6 个探针 75 个挂点的 guard 审计报告
 ```
 
 ## 复现路径
@@ -47,6 +83,9 @@ artifacts/ paths.txt                   # 从样本中提取的接口路径全集
 ```bash
 # 1) 字符串级侦察（不需要任何工具链）
 python3 tools/kwscan.py 补签 签到 学号 弹幕     # 直接读 lib/arm64-v8a/libapp.so
+
+# 1.5) 审计所有探针挂点的 guard 是否与本样本一致（防版本错配误挂）
+python3 tools/guard_audit.py            # 当前 6 个探针 / 75 点 / 0 不一致
 
 # 2) Dart AOT 反编译（Route B: blutter，需 cmake3.20+/ninja/C++20）
 #    产物 asm/ 目录按库 URI 每文件一个，是最富的反汇编源；addr 即 RVA

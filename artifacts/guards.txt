@@ -1,0 +1,79 @@
+挂点 guard 审计（libapp.so 文件字节序，地址=文件偏移=RVA for .text）
+文件                         name                                                                                  rva  声明                   实测                   结论
+ykt_beat_probe.js          HeartBeatUtil::postBeat                                                        0x00bdec24  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_beat_probe.js          HeartBeatUtil::getHeartBeatData                                                0x00c46bf4  fd79bfa9,ef6100d1    fd79bfa9,ef6100d1    OK
+ykt_beat_probe.js          HeartBeatUtil::heartBeatUpload                                                 0x00c45d90  fd79bfa9,efa100d1    fd79bfa9,efa100d1    OK
+ykt_beat_probe.js          HeartBeatUtil::localBeatUploadUnLock                                           0x00c25d3c  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_beat_probe.js          HeartBeatUtil::heartBeatUploadAudio                                            0x00dd4834  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_beat_probe.js          BeatDBHelper::insertHeartBeat                                                  0x00bdff84  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_beat_probe.js          BeatDBHelper::selectHeartBeats                                                 0x00bdcdf8  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_beat_probe.js          LiveHeartBeatUtil::postLiveBeat                                                0x00bde484  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_bridge_probe.js        JsCallFlutter::dispatchAction                                                  0x00ba725c  fd79bfa9,ef4104d1    fd79bfa9,ef4104d1    OK
+ykt_bridge_probe.js        ShareJsCallFlutter::dispatchAction                                             0x00c7de84  fd79bfa9,efa102d1    fd79bfa9,efa102d1    OK
+ykt_bridge_probe.js        _ExamPageState::dispatch(js)                                                   0x00c97744  fd79bfa9,efe103d1    fd79bfa9,efe103d1    OK
+ykt_bridge_probe.js        _StudyPartnerWebviewState::dispatch                                            0x00d5e07c  fd79bfa9,efc103d1    fd79bfa9,efc103d1    OK
+ykt_bridge_probe.js        DataUtil::getJournalH5Url                                                      0x00e953cc  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_bridge_probe.js        getWebViewPageWidget                                                           0x00bd121c  fd79bfa9,ef8105d1    fd79bfa9,ef8105d1    OK
+ykt_bridge_probe.js        JsCallFlutter::getTokenData                                                    0x00bc5024  fd79bfa9,ef6105d1    fd79bfa9,ef6105d1    OK
+ykt_bridge_probe.js        JsCallFlutter::uploadFile                                                      0x00bc676c  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_bridge_probe.js        JsCallFlutter::getAliOssConfig                                                 0x00bc630c  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_bridge_probe.js        JsCallFlutter::postHomeworkDataToJS                                            0x00bc6004  fd79bfa9,ef0101d1    fd79bfa9,ef0101d1    OK
+ykt_bridge_probe.js        _MyHomePageState::processLinkParams                                            0x00c20698  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_bridge_probe.js        LogUtils::i                                                                    0x007da6f4  fd79bfa9,ef2100d1    fd79bfa9,ef2100d1    OK
+ykt_checkin_probe.js       BaseNet::requestPost                                                           0x00923178  fd79bfa9,ef4105d1    fd79bfa9,ef4105d1    OK
+ykt_checkin_probe.js       YuKetang::checkin                                                              0x00c521fc  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_checkin_probe.js       YuKetang::fetchCheckinList                                                     0x00c5687c  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_checkin_probe.js       _ReceiverClassPageState::_postLessonCheckin                                    0x00c196cc  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_checkin_probe.js       _HmsScanPageState::_postLessonCheckin                                          0x00cd042c  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_checkin_probe.js       _JoinClassroomDialogState::join                                                0x00f9e3ac  fd79bfa9,efc101d1    fd79bfa9,efc101d1    OK
+ykt_checkin_probe.js       _LocationCheckInPageState::_loadEligibility                                    0x00c64f04  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_checkin_probe.js       _LocationCheckInPageState::_submit                                             0x00dee0b0  fd79bfa9,efa101d1    fd79bfa9,efa101d1    OK
+ykt_checkin_probe.js       JoinLessonBean.fromJson(普通/网页签到响应)                                             0x0114cb3c  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_checkin_probe.js       LocationCheckinSubmitBean.fromJson(定位签到响应)                                     0x01171334  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_checkin_probe.js       LocationCheckinEligibilityData.fromJson(资格:isLate/wouldBeLate/pastOfficialEnd) 0x0116faa0  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_checkin_probe.js       LocationCheckinOverviewData.fromJson(老师端总览:isLate/time/lat/lng/address)        0x01183c14  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_checkin_probe.js       LessonCheckinBean.fromJson                                                     0x0116d7bc  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_hooks.js               签到·课堂签到 YuKetang::checkin                                                      0x00c521fc  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_hooks.js               签到·列表 YuKetang::fetchCheckinList                                               0x00c5687c  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_hooks.js               签到·定位提交 _LocationCheckInPageState::_submit                                     0x00dee0b0  fd79bfa9,efa101d1    fd79bfa9,efa101d1    OK
+ykt_hooks.js               签到·范围重算 _updateRangeState                                                      0x00c62da8  fd79bfa9,efa100d1    fd79bfa9,efa100d1    OK
+ykt_hooks.js               签到·资格拉取 _loadEligibility                                                       0x00c64f04  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               签到·范围预览 _fetchRangePreview                                                     0x00c62e20  fd79bfa9,efc101d1    fd79bfa9,efc101d1    OK
+ykt_hooks.js               签到·WS 延长 _onLocationCheckinExt                                                 0x00c627fc  fd79bfa9,ef0101d1    fd79bfa9,ef0101d1    OK
+ykt_hooks.js               签到·WS 结束 _onLocationCheckinEnd                                                 0x00c61da4  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_hooks.js               签到·课堂页上报 _ReceiverClassPageState::_postLessonCheckin                           0x00c196cc  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               签到·扫码上报 _HmsScanPageState::_postLessonCheckin                                  0x00cd042c  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               签到·手输入口 _JoinClassroomDialogState::join                                        0x00f9e3ac  fd79bfa9,efc101d1    fd79bfa9,efc101d1    OK
+ykt_hooks.js               作答·单选提交 _SingleChoiceQuestionPageState::_submitAnswer                          0x00df5a34  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               作答·主观题提交 _SubjectiveQuestionPageState::_submit                                 0x00e0164c  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               作答·抢答提交 _ReceiverClassPageState::_submitRapidAnswer                            0x00bd9088  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               作答·弹幕 YuKetang::sendDanmu                                                      0x00d7ccdc  fd79bfa9,ef0101d1    fd79bfa9,ef0101d1    OK
+ykt_hooks.js               成绩·教师给分详情 YuKetang::scoreDetail                                                0x00d59ed0  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+ykt_hooks.js               成绩·教师给分/互评 YuKetang::giveHupingScore                                           0x010c0acc  fd79bfa9,efc101d1    fd79bfa9,efc101d1    OK
+ykt_hooks.js               成绩·学生互评提交 _ScoreEachOtherPageState::_submitScore                               0x01041308  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_hooks.js               作业·H5 桥 dispatchAction                                                         0x00ba725c  fd79bfa9,ef4104d1    fd79bfa9,ef4104d1    OK
+ykt_hooks.js               作业·原生回调 H5 postHomeworkDataToJS                                                0x00bc6004  fd79bfa9,ef0101d1    fd79bfa9,ef0101d1    OK
+ykt_hooks.js               作业·打开作业文件 openHomeworkFile                                                     0x00bd3814  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_hooks.js               反作弊·考试上报 ExamPage::reprotExam                                                  0x0093d76c  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_hooks.js               反作弊·上报并弹提示 reprotExamShowToast                                                 0x0093dce4  fd79bfa9,efa101d1    fd79bfa9,efa101d1    OK
+ykt_hooks.js               网络·统一 POST 出口 BaseNet::requestPost                                             0x00923178  fd79bfa9,ef4105d1    fd79bfa9,ef4105d1    OK
+ykt_hooks.js               网络·统一加头 BaseNet::addHeader                                                     0x00bde930  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_proctor_probe.js       ExamPage::reprotExam(action, exam_id)                                          0x0093d76c  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_proctor_probe.js       ExamPage::reprotExamShowToast(action)                                          0x0093dce4  fd79bfa9,efa101d1    fd79bfa9,efa101d1    OK
+ykt_proctor_probe.js       ExamPage::reprotExamByVm(vm_report)                                            0x00c970f8  fd79bfa9,ef8101d1    fd79bfa9,ef8101d1    OK
+ykt_proctor_probe.js       ExamPage::_listenAppSizeChange                                                 0x00c91d90  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_proctor_probe.js       ExamPage::examSplitScreenResumeCallBack                                        0x00c96e10  fd79bfa9,ef4100d1    fd79bfa9,ef4100d1    OK
+ykt_proctor_probe.js       ExamPage::_detectGuangsuVirtualMachine                                         0x00c96f90  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_proctor_probe.js       collectVirtualEnvironmentReport                                                0x00c972f8  fd79bfa9,ef0102d1    fd79bfa9,ef0102d1    OK
+ykt_proctor_probe.js       ExamPage::postAutoPhotoUpload(path)                                            0x00c9ec8c  fd79bfa9,ef4101d1    fd79bfa9,ef4101d1    OK
+ykt_proctor_probe.js       ExamPage::_uploadImageCallH5Methods(url)                                       0x00c9ef68  fd79bfa9,efc100d1    fd79bfa9,efc100d1    OK
+ykt_proctor_probe.js       ExamPage::closure_AutoCameraEvent                                              0x00c92cfc  fd79bfa9,a00f40f9    fd79bfa9,a00f40f9    OK
+ykt_ws_probe.js            WSConnector::WSConnector                                                       0x00c15134  fd79bfa9,ef2100d1    fd79bfa9,ef2100d1    OK
+ykt_ws_probe.js            WSConnector::connect                                                           0x00c15220  fd79bfa9,efe100d1    fd79bfa9,efe100d1    OK
+ykt_ws_probe.js            WSConnector::send                                                              0x0091e988  fd79bfa9,ef6100d1    fd79bfa9,ef6100d1    OK
+ykt_ws_probe.js            ReceiverProcesser::process                                                     0x0142515c  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_ws_probe.js            RemoteControlProcesser::process                                                0x0143a028  fd79bfa9,efa100d1    fd79bfa9,efa100d1    OK
+ykt_ws_probe.js            WSConnector::_tryReconnectAfterDelay                                           0x00c191f8  fd79bfa9,ef8100d1    fd79bfa9,ef8100d1    OK
+ykt_ws_probe.js            WSConnector::_teardownChannel                                                  0x00c1905c  fd79bfa9,ef6101d1    fd79bfa9,ef6101d1    OK
+
+合计 75 点：OK 75 / 不一致 0

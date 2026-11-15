@@ -68,6 +68,7 @@ function resolveBase() {
 
 function hexBytes(addr, n) {
   const b = new Uint8Array(addr.readByteArray(n));
+  // guard 与 libapp.so 文件字节同序（readByteArray 原始顺序），勿倒序
   let s = "";
   for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, "0");
   return s;

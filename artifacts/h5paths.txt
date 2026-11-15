@@ -1,0 +1,464 @@
+# h5paths.txt -- 雨课堂 libapp.so 路径型字面量全表 (ASCII + UTF-16LE 双解码)
+# 生成器: tools/h5paths.py  样本: so/lib/arm64-v8a/libapp.so (21431216 bytes)
+# token 扫描总数=140988 ; 唯一路径型字面量=355 ; 唯一URL=48 ; 唯一host=38
+# 偏移 = 该字面量在文件内首次出现的字节偏移 (ascii=字节, u16=字节, /url 表示来自完整URL)
+
+## [REST端点] 共 183 条
+0x00158d41  x1    ascii    /api/cop/change_directory
+0x000ed3e5  x1    ascii    /api/lesson/web_check_in
+0x001a17c3  x1    ascii    /api/quiz/quiz_results_detail/
+0x0010dba4  x1    ascii    /api/v1/lms/learn/user_article_finish/
+0x001465a1  x1    ascii    /api/v3/activities/published/
+0x001c5bae  x1    ascii    /api/v3/activities/received/
+0x0007c337  x1    ascii    /api/v3/activities/status/
+0x001c8b20  x1    ascii    /api/v3/app/scan
+0x001c581f  x1    ascii    /api/v3/classroom/basic-info?classroom_id=
+0x0008eade  x1    ascii    /api/v3/classroom/join
+0x0017766c  x1    ascii    /api/v3/classroom/lesson-config
+0x001cb604  x1    ascii    /api/v3/classroom/on-lesson-upcoming-exam
+0x000941fd  x1    ascii    /api/v3/group/team/detail?team_id=
+0x000f4561  x1    ascii    /api/v3/lesson/ai-task/receive-list
+0x00184d74  x1    ascii    /api/v3/lesson/ai-task/receive-list?status=0
+0x0017ea55  x1    ascii    /api/v3/lesson/ai-task/start-task
+0x0013aee0  x1    ascii    /api/v3/lesson/ai-task/task-info?taskId=
+0x001703c5  x1    ascii    /api/v3/lesson/assess/score/changed
+0x00185caf  x1    ascii    /api/v3/lesson/assess/student/about
+0x0017414e  x1    ascii    /api/v3/lesson/assess/tag/bind_student
+0x0011d5cd  x1    ascii    /api/v3/lesson/assess/tag/created
+0x001c27d9  x1    ascii    /api/v3/lesson/assess/tag/deleted
+0x0012afa1  x1    ascii    /api/v3/lesson/basic-info
+0x00130b0b  x1    ascii    /api/v3/lesson/checkin
+0x0012aed5  x1    ascii    /api/v3/lesson/checkin-list
+0x000bd39d  x1    ascii    /api/v3/lesson/checkin/delete
+0x0005e3a8  x1    ascii    /api/v3/lesson/checkin/detail
+0x000a9e34  x1    ascii    /api/v3/lesson/checkin/revise
+0x0008f04b  x1    ascii    /api/v3/lesson/danmu/lesson/get
+0x0013fea3  x1    ascii    /api/v3/lesson/danmu/send
+0x00179280  x1    ascii    /api/v3/lesson/detail
+0x001087c8  x1    ascii    /api/v3/lesson/end
+0x001c84ec  x1    ascii    /api/v3/lesson/fetch-user-notification
+0x00194a5e  x1    ascii    /api/v3/lesson/group-event/ai-summary
+0x000d180e  x1    ascii    /api/v3/lesson/group-event/chat-message?eventId=
+0x001a77b7  x1    ascii    /api/v3/lesson/group-event/create
+0x001a8bd4  x1    ascii    /api/v3/lesson/group-event/delay
+0x0011c1a8  x1    ascii    /api/v3/lesson/group-event/detail?eventId=
+0x000ad9d4  x1    ascii    /api/v3/lesson/group-event/end
+0x00075850  x1    ascii    /api/v3/lesson/group-event/list
+0x0012fd0c  x1    ascii    /api/v3/lesson/group-event/send-group-message
+0x001091d4  x1    ascii    /api/v3/lesson/group-event/share-detail?shareId=
+0x000f4796  x1    ascii    /api/v3/lesson/group-event/share-to-class
+0x001127cd  x1    ascii    /api/v3/lesson/group-event/student/status
+0x00095607  x1    ascii    /api/v3/lesson/group-event/summary
+0x000d7ebb  x1    ascii    /api/v3/lesson/live/get-info?live_id=
+0x001a5f15  x1    ascii    /api/v3/lesson/live/new/get-params-after-class
+0x00170319  x1    ascii    /api/v3/lesson/location-checkin/eligibility
+0x0016b105  x1    ascii    /api/v3/lesson/location-checkin/end
+0x0010eab6  x1    ascii    /api/v3/lesson/location-checkin/extend
+0x001bf133  x1    ascii    /api/v3/lesson/location-checkin/overview
+0x001ac8e9  x1    ascii    /api/v3/lesson/location-checkin/preview
+0x0011f7dd  x1    ascii    /api/v3/lesson/location-checkin/session
+0x00147544  x1    ascii    /api/v3/lesson/location-checkin/submit
+0x0012220b  x1    ascii    /api/v3/lesson/meeting/device
+0x000c7f63  x1    ascii    /api/v3/lesson/meeting/forbidden-speech/state
+0x001c4836  x1    ascii    /api/v3/lesson/meeting/get-config
+0x00073471  x1    ascii    /api/v3/lesson/meeting/join
+0x0014900e  x1    ascii    /api/v3/lesson/meeting/leave
+0x00109b17  x1    ascii    /api/v3/lesson/meeting/member-list
+0x0009a0b9  x1    ascii    /api/v3/lesson/meeting/report
+0x001cd5f5  x1    ascii    /api/v3/lesson/meeting/tencent/check-bind
+0x0005f50c  x1    ascii    /api/v3/lesson/presentation/fetch
+0x000e703a  x1    ascii    /api/v3/lesson/presentation/from-cards-collection
+0x000a44c7  x1    ascii    /api/v3/lesson/problem/answer
+0x000c5a94  x1    ascii    /api/v3/lesson/problem/blank-detail
+0x000f5a6c  x1    ascii    /api/v3/lesson/problem/choice-detail
+0x0017d4f6  x1    ascii    /api/v3/lesson/problem/delay
+0x000b53e9  x1    ascii    /api/v3/lesson/problem/fetch-answer
+0x001321bf  x1    ascii    /api/v3/lesson/problem/finish
+0x000feed5  x1    ascii    /api/v3/lesson/problem/grade
+0x00069ed3  x1    ascii    /api/v3/lesson/problem/group/subj-list
+0x0017ee30  x1    ascii    /api/v3/lesson/problem/group/subjective/list?problem_id=
+0x001a21e7  x1    ascii    /api/v3/lesson/problem/group/subjective/status?problem_id=
+0x0017e2c4  x1    ascii    /api/v3/lesson/problem/histogram
+0x000c5116  x1    ascii    /api/v3/lesson/problem/retry
+0x000a7593  x1    ascii    /api/v3/lesson/problem/subj-list-count
+0x000e8f97  x1    ascii    /api/v3/lesson/problem/subj-result?problem_id=
+0x001b5e36  x1    ascii    /api/v3/lesson/problem/teacher/score-detail
+0x0007e90b  x1    ascii    /api/v3/lesson/problem/unlock
+0x000a2c2d  x1    ascii    /api/v3/lesson/quiz/dir
+0x000e165d  x1    ascii    /api/v3/lesson/quiz/finish
+0x001132fa  x1    ascii    /api/v3/lesson/quiz/list
+0x0012d122  x1    ascii    /api/v3/lesson/quiz/publish
+0x0010f70e  x1    ascii    /api/v3/lesson/quiz/statistics
+0x000ee667  x1    ascii    /api/v3/lesson/quiz/status
+0x00078fb0  x1    ascii    /api/v3/lesson/rapid-answer/end
+0x0019c9ea  x1    ascii    /api/v3/lesson/rapid-answer/get-info?id=
+0x0017bd9a  x1    ascii    /api/v3/lesson/rapid-answer/participate
+0x0008c663  x1    ascii    /api/v3/lesson/rapid-answer/records
+0x000bfc29  x1    ascii    /api/v3/lesson/rapid-answer/score
+0x0015e904  x1    ascii    /api/v3/lesson/rapid-answer/start
+0x001cb968  x1    ascii    /api/v3/lesson/redenvelope/create
+0x000ca2dd  x1    ascii    /api/v3/lesson/redenvelope/issue-list
+0x001a01b7  x1    ascii    /api/v3/lesson/redenvelope/issue-list?redEnvelopeId=
+0x00113e36  x1    ascii    /api/v3/lesson/redenvelope/prepare
+0x001adf95  x1    ascii    /api/v3/lesson/review/config
+0x001777c6  x1    ascii    /api/v3/lesson/review/get-problem-review-detail
+0x00130107  x1    ascii    /api/v3/lesson/review/publish-review
+0x001a06e8  x1    ascii    /api/v3/lesson/review/status-list
+0x000b4a51  x1    ascii    /api/v3/lesson/review/submit-review-score
+0x000ebddb  x1    ascii    /api/v3/lesson/search-member
+0x0019cc16  x1    ascii    /api/v3/lesson/tag
+0x000c73f5  x1    ascii    /api/v3/lesson/tag/lesson
+0x000e7e15  x1    ascii    /api/v3/lesson/tag/lesson/teacher
+0x0019a65e  x1    ascii    /api/v3/lesson/tag/lesson/teacher/file-sharing
+0x0015e833  x1    ascii    /api/v3/lesson/tougao/add
+0x000ea5b6  x1    ascii    /api/v3/lesson/tougao/delete
+0x00114dc1  x1    ascii    /api/v3/lesson/tougao/detail/index?tougaoIndex=
+0x0016e285  x1    ascii    /api/v3/lesson/tougao/detail?tougaoId=
+0x00123363  x1    ascii    /api/v3/lesson/tougao/list?start=-1&count=100&type=1
+0x0010b7ec  x1    ascii    /api/v3/lesson/tougao/list?start=-1&count=500&type=2
+0x0017e5bb  x1    ascii    /api/v3/lesson/tougao/share-screen
+0x000a83fa  x1    ascii    /api/v3/lesson/tougao/unread
+0x00068e3d  x1    ascii    /api/v3/lesson/uncheckin-list
+0x001b840c  x1    ascii    /api/v3/location-checkin/mobile-setup/detail
+0x000e8418  x1    ascii    /api/v3/location-checkin/mobile-setup/submit
+0x001523d4  x1    ascii    /api/v3/location-checkin/mobile-setup/verify
+0x001c0f0d  x1    ascii    /api/v3/location-checkin/update-session
+0x000b46a5  x1    ascii    /api/v3/message/config
+0x0018e007  x1    ascii    /api/v3/message/config/update
+0x000bb176  x1    ascii    /api/v3/message/notice-list/?biz_id=0&tag=1&recipient_user_id=
+0x001c2973  x1    ascii    /api/v3/message/notice-list/?biz_id=0&tag=2&recipient_user_id=
+0x000c8869  x1    ascii    /api/v3/message/notice/delete
+0x00177ae9  x1    ascii    /api/v3/message/notice/read
+0x001084ea  x1    ascii    /api/v3/tencent-lbs/proxy
+0x000ed9ad  x1    ascii    /api/v3/user/basic-info
+0x000da7d4  x1    ascii    /api/v3/user/bind-to-wechat
+0x0016247e  x1    ascii    /api/v3/user/check-phone-number-bind
+0x00111c19  x1    ascii    /api/v3/user/code/send
+0x000f8e24  x1    ascii    /api/v3/user/code/verify
+0x001bd2b4  x1    ascii    /api/v3/user/config
+0x0014736d  x1    ascii    /api/v3/user/login/app
+0x000dd5eb  x1    ascii    /api/v3/user/login/app/wechat
+0x0019e8fa  x1    ascii    /api/v3/user/login/scan-handler
+0x0011632f  x1    ascii    /api/v3/user/logout
+0x0012238b  x1    ascii    /api/v3/user/pre-register/app
+0x0010000f  x1    ascii    /api/v3/user/register/app
+0x0018a0ca  x1    ascii    /api/v3/user/set-password
+0x00095554  x1    ascii    /api/v3/user/update-config
+0x000c915a  x1    ascii    /api/v3/user/update-phone-number
+0x00108775  x1    ascii    /c27/api/v1/platfrom/watermark
+0x00138efc  x1    ascii    /m/v2/course/normalcourse/logs/
+0x000b1a48  x1    ascii    /m/v2/lesson/student/
+0x000a2180  x1    ascii    /m/v2/lesson/teacher/
+0x00152a62  x1    ascii    /m/v2/wake-lesson
+0x001a64c0  x1    ascii    /mobile-app/api/app-version/app-latest/
+0x000a63ef  x1    ascii    /mobile-app/api/qiniu-token
+0x001756e9  x1    ascii    /mobile-app/api/user/profile
+0x001ac0af  x1    ascii    /mobile-app/video-log/heartbeat/*
+0x0011ae81  x1    ascii    /mooc-api/v1/lms/exercise/leaf_video/problem/
+0x0018ba5e  x1    ascii    /mooc-api/v1/lms/exercise/leaf_video/problem/reply/
+0x000a6e82  x1    ascii    /mooc-api/v1/lms/lms/service/s_t_g_p/
+0x000e2acf  x1    ascii    /nodeapi/notify_lists?label=pm&start=
+0x00076d5f  x1    ascii    /nodeapi/notify_lists?label=pm&start=0&limit=10
+0x000cc3c8  x1    ascii    /v/api/tougao/pic_upload
+0x001119b2  x1    ascii    /v/course_meta/v2/classroom/create
+0x0009aac4  x1    ascii    /v/course_meta/v2/classroom/del_confirm
+0x000ad592  x1    ascii    /v/course_meta/v2/classroom/delete
+0x0016e531  x1    ascii    /v/course_meta/v2/classroom/edit
+0x00124374  x1    ascii    /v/course_meta/v2/course/del_confirm
+0x00087edd  x1    ascii    /v/course_meta/v2/course/edit
+0x0006d2ca  x1    ascii    /v/course_meta/v2/course/intro
+0x001a7c4e  x1    ascii    /v/course_meta/v2/course/setting
+0x0016b5cf  x1    ascii    /v/course_meta/v2/university/settings?source_id=
+0x0016c08a  x1    ascii    /v/discussion/v2/announcement/done/
+0x000fad1d  x1    ascii    /v/discussion/v2/comment/
+0x0006a597  x1    ascii    /v/discussion/v2/notice/read/info/
+0x0008adaf  x1    ascii    /v/discussion/v2/reply/comment/
+0x000b78ab  x1    ascii    /v/discussion/v2/reply/reply/
+0x001906b9  x1    ascii    /v/discussion/v2/topics/
+0x000f61e3  x1    ascii    /v/discussion/v2/unit/discussion/?sku_id=
+0x000c5647  x1    ascii    /v1/lms/learn/leaf_info/
+0x00188d47  x1    ascii    /v1/lms/learn/video/drag?sku_id=
+0x001c6a73  x1    ascii    /v1/lms/service/playurl/
+0x0011da6e  x1    ascii    /v2/api/web/classroom_archive_set
+0x000b0441  x1    ascii    /v2/api/web/classrooms/quit
+0x0015fccc  x1    ascii    /v2/api/web/classrooms/toggletop
+0x000ab296  x1    ascii    /v2/api/web/courses/toggletop?classroom_id=
+0x00156534  x1    ascii    /video-log/get_video_watch_progress/?cid=
+0x000de6c3  x3    ascii/url /video-log/log/track/
+0x00197ed5  x1    ascii    /wsapp/
+0x001a1b0a  x1    ascii    /wxapi/lesson_check_in
+
+## [云侧H5页面] 共 18 条
+0x000ee238  x1    ascii/url /download-android.html
+0x000fcdbe  x1    ascii    /h5/appexam/
+0x00097e87  x1    ascii    /static/html/tsinghua_bind.html
+0x0018c5d4  x1    ascii    /v/index/course/normalcourse/exam/
+0x0017e060  x1    ascii    /v/index/course/normalcourse/examcover/
+0x0008f465  x1    ascii    /v/index/course/normalcourse/learning_cards_detail/
+0x0012eebf  x1    ascii    /v/index/course/normalcourse/learning_lesson_detail/
+0x000c2f39  x1    ascii    /v/index/course/normalcourse/teacher_quiz_detail/
+0x00176bab  x1    ascii    /v/index/course/normalcourse/teaching_cards_detail/
+0x001ad66a  x1    ascii    /v/index/course/normalcourse/teaching_lesson_detail/
+0x000edadc  x1    ascii    /v/index/course/openplatform/student_sydetail/
+0x000f229e  x1    ascii    /v/index/course/openplatform/teacher_sydetail/
+0x000ce945  x1    ascii    /v/index/course_v/notice_notice_up/
+0x001a26d2  x1    ascii    /v/index/course_v/notice_view/
+0x000a480a  x1    ascii    /v/index/letter/
+0x001528ba  x1    ascii    /v/index/my_collections?flutterHome=true
+0x001ac574  x1    ascii    /v/index/my_papers?flutterHome=true
+0x000b521d  x1    ascii    /v/index/mystore
+
+## [静态资源] 共 12 条
+0x0006d7f1  x1    ascii/url /fe-proxtassets/onlineexam/nocamera1.png
+0x000eaa91  x1    ascii    /idphoto/upload/token
+0x00158e30  x1    ascii    /image_cropper.png
+0x00199145  x1    ascii/url /o_1fl5tm5361skdeuu1dgr1apr1vedq.png
+0x000f7a85  x1    ascii/url /o_1fl5tm537174erv9bersva1rdgs.png
+0x000841ce  x1    ascii/url /o_1fl5tm5371chsp651b4pej01ub11.png
+0x001af638  x1    ascii/url /o_1fl5tm5371iv85gffbok7u1jupu.png
+0x0014e86b  x1    ascii/url /o_1fl5tm5371q5bqcl15r8g0bfuhv.png
+0x000ddcc2  x1    ascii/url /o_1fl5tm5371uhuidb1kg91jpj9kc10.png
+0x000bd2f6  x1    ascii/url /o_1fl5tm5373mrjrpaf29sa1f77r.png
+0x00167aed  x1    ascii/url /o_1fl5tm537kvl10esc9dhbc1a06t.png
+0x001b4ae1  x1    ascii    /uploads/
+
+## [PC端] 共 13 条
+0x001012d0  x1    ascii    /pc/apply_close_account?user_id=
+0x000e7593  x1    ascii    /pc/bind_phone
+0x001201ab  x1    ascii    /pc/cancel_close_account
+0x000841b5  x1    ascii    /pc/generate_qiniu_token
+0x000c49ef  x1    ascii    /pc/hole_service_notice/
+0x001a4b26  x1    ascii    /pc/register/bind_email/
+0x00068d6f  x1    ascii    /pc/register/get_user_bind_status/
+0x00139f27  x1    ascii    /pc/register/send_email_code/
+0x0014175f  x1    ascii    /pc/register/set_password/
+0x000bc7e0  x1    ascii    /pc/send_sms_code
+0x000c4763  x1    ascii    /pc/user_information
+0x001b901d  x1    ascii    /pc/web_ppt_config
+0x001b5a3a  x1    ascii    /pc/webview_sso?session_id=
+
+## [bindmobile/身份绑定] 共 13 条
+0x0013d87f  x1    ascii    /bindmobile/audio-student-unit/
+0x0018b043  x1    ascii    /bindmobile/cloud/exercise/cover/
+0x001b6c4c  x1    ascii    /bindmobile/cloud/teacher/exercise/
+0x001b509d  x1    ascii    /bindmobile/paperpreview?paperid=
+0x001b6ce8  x1    ascii    /bindmobile/student/forum/
+0x000b2a67  x1    ascii    /bindmobile/student/graph/
+0x001c26db  x1    ascii    /bindmobile/teacher/forum/
+0x0013cd70  x1    ascii    /bindmobile/teacher/graph/
+0x0014af51  x1    ascii    /bindmobile/teaching-audio-detail/*
+0x000bee43  x1    ascii    /bindmobile/teaching-video-detail/
+0x0017d3ae  x1    ascii    /bindmobile/video-student-unit/
+0x001729c6  x1    ascii    /school_name/school_name_query
+0x001834e0  x1    ascii    /v/index/bindSchool_list
+
+## [其他接口(/v、/group、/c27 等旧前缀)] 共 94 条
+0x0010087e  x1    ascii    /ai-workspace/chatbot-lesson/
+0x0007faf8  x1    ascii    /ai-workspace/chatbot-mobile/
+0x000b0685  x1    ascii    /authorize/account?from=setting
+0x001770eb  x1    ascii    /authorize/bind?id=
+0x0016f411  x1    ascii    /authorize/hcaptcha_app?lang=
+0x001c7a63  x1    ascii    /c27/online_courseware/agent/entity_agents/?entity_type=1&entity_id=
+0x0019eca7  x1    ascii    /c27/online_courseware/agent/toolkits/issue_html_uid/?user_id=
+0x000d48ef  x1    ascii    /c27/online_courseware/xty/kls/pub_news/
+0x000df633  x1    ascii    /c27/online_courseware/ykt/agent/
+0x000cfde4  x1    ascii    /c27/online_courseware/ykt/system_message/
+0x000d6516  x1    ascii    /c27/online_courseware/ykt/system_message/?client_type=1
+0x0007d00c  x1    ascii    /comment/
+0x001b8c33  x1    ascii    /comment/?id=
+0x0014344c  x1    ascii    /comment/list/
+0x001a19af  x1    ascii    /course_meta/manage_collection_info/
+0x001a5a9d  x1    ascii    /exam_room/answer_problem
+0x0018617c  x1    ascii    /exposure/?client_type=1
+0x0010700f  x1    ascii    /group/create_new_classroom_group/
+0x001963f5  x1    ascii    /group/create_team/
+0x001607e7  x1    ascii    /group/delete_classroom_group/
+0x001c4462  x1    ascii    /group/delete_team/
+0x0006b225  x1    ascii    /group/get_classroom_group_list
+0x00159607  x1    ascii    /group/get_classroom_group_list/
+0x0017524d  x1    ascii    /group/get_classroom_info/
+0x001bdc46  x1    ascii    /group/get_team_detail/
+0x000ec612  x1    ascii    /group/get_team_list/
+0x00107558  x1    ascii    /group/manage_group_all_member/
+0x0005f030  x1    ascii    /group/manage_team_member/
+0x0012a15c  x1    ascii    /group/rename_classroom_group/
+0x00108dde  x1    ascii    /group/rename_team/
+0x000cfa58  x1    ascii    /group/student/get_all_group_list/
+0x000aa71b  x1    ascii    /group/student/get_all_group_list/?classroom_id=
+0x0015ba13  x1    ascii    /group/student/get_free_group_declaration/?group_id=
+0x0007ecf1  x1    ascii    /group/student/get_group_detail/?group_id=
+0x0014a7f0  x1    ascii    /group/student/get_team_detail/?team_id=
+0x000d2437  x1    ascii    /group/student/join_free_team/
+0x000c41cd  x1    ascii    /group/student/join_self_chosen_team/
+0x001ab0eb  x1    ascii    /group/student/not_join_warning/
+0x00103d62  x1    ascii    /group/student/preview_free_team/?group_id=
+0x00167312  x1    ascii    /group/student/quit_team/
+0x000eace4  x1    ascii    /hits/?client_type=1
+0x0013a1fa  x1    ascii    /idphoto/create
+0x0012ee11  x1    ascii    /liked/
+0x0017a757  x1    ascii    /login/app
+0x001ac949  x1    ascii    /login/app_version_log?exam_id=
+0x0010e7d5  x1    ascii/url /mobile-app/private-url?platform=ykt&key=app_harmony_3rd
+0x0010d0bb  x1    ascii/url /mobile-app/private-url?platform=ykt&key=secret_url
+0x001004b6  x1    ascii/url /mobile-app/private-url?platform=ykt&key=user_protocol
+0x00125223  x1    ascii    /mobile-app/xt
+0x001ac5f3  x1    ascii    /mobile-app/ykt
+0x000b030f  x1    ascii    /online_proctor/stu/face-compare
+0x000910e4  x1    ascii    /online_proctor/stu/monitor/feed/add
+0x000bb1b5  x1    ascii    /progress/
+0x001afc81  x1    ascii    /quiz/manage_paper_info/
+0x00159f85  x1    ascii    /quiz/quiz_info/
+0x000cd9f5  x1    ascii    /remotor/group/overview
+0x0012b98f  x1    ascii    /reply/
+0x0019793e  x1    ascii    /reply/list/
+0x0012b42e  x1    ascii    /reply/reply/?id=
+0x0008f198  x1    ascii    /top/?status=
+0x001c377b  x1    ascii    /topic/
+0x000d7597  x1    ascii    /topic/detail/
+0x001c370c  x1    ascii    /v/cards/own_collections
+0x000fcf5d  x1    ascii    /v/course_meta/archive_course
+0x0017a073  x1    ascii    /v/course_meta/cancel_archive_course
+0x001aaf71  x1    ascii    /v/course_meta/create_course
+0x0018ef83  x1    ascii    /v/course_meta/delete_collection
+0x0012de9e  x1    ascii    /v/course_meta/delete_course
+0x000a9a10  x1    ascii    /v/course_meta/edit_user_avatar
+0x001916fd  x1    ascii    /v/course_meta/edit_user_info
+0x0014ff13  x1    ascii    /v/course_meta/join_classroom
+0x0010a9c5  x1    ascii    /v/course_meta/learning_list/
+0x00092cf4  x1    ascii    /v/course_meta/modify_collection_info/
+0x0012d657  x1    ascii    /v/course_meta/my_archive_courses
+0x000f64a0  x1    ascii    /v/course_meta/my_collections
+0x0012132e  x1    ascii    /v/course_meta/my_courses_top
+0x0012eb52  x1    ascii    /v/course_meta/pending_archive_classrooms
+0x0014994b  x1    ascii    /v/course_meta/teaching_list/
+0x000d56b4  x1    ascii    /v/course_meta/user_info
+0x001ba703  x1    ascii    /v/course_meta/user_univeristy/
+0x000e9d93  x1    ascii    /v/discussion/v2
+0x001093b7  x1    ascii    /v/exam/cover?exam_id=
+0x000efab3  x1    ascii    /v/exam/gen_token
+0x0019bca2  x1    ascii    /v/lesson/get_problem_show_answer_config/
+0x0008555d  x1    ascii    /v/lesson/get_show_user_profile_config/
+0x000acbc0  x1    ascii    /v/lesson/lesson_group_info?lesson_id=
+0x00184198  x1    ascii    /v/link/links_info/
+0x0007bcbc  x1    ascii    /v/quiz/delete_paper
+0x0015e47e  x1    ascii    /v/quiz/modify_paper_info/
+0x001c422d  x1    ascii    /v/quiz/my_papers
+0x000817cc  x1    ascii    /v/quiz/own_papers
+0x000fce0e  x1    ascii    /v/quiz/quiz_result/
+0x00107f04  x1    ascii    /v/user/get_current_language
+0x000c7213  x1    ascii    /v/user/set_language/
+
+## [非应用噪音(库/命名空间)] 共 22 条
+0x00134b6f  x1    ascii    /.cookies/
+0x0017e3da  x1    ascii/url /1998/Math/MathML
+0x0017dd58  x1    ascii/url /1999/xhtml
+0x000e3dd3  x1    ascii/url /1999/xlink
+0x000d958a  x1    ascii    /2.0x/
+0x000b48d1  x2    ascii/url /2000/svg
+0x00190b8c  x1    ascii/url /2000/xmlns/
+0x0006bc00  x1    ascii    /3.0x/
+0x00038b85  x1    ascii    /9/r
+0x0009955d  x1    ascii/url /XML/1998/namespace
+0x00189df6  x1    ascii    /buckets/
+0x000eb59f  x1    ascii/url /dart-lang/language/issues/3488
+0x000a1020  x1    ascii/url /data/dtd/v11/ibmxhtml1-transitional.dtd
+0x001572b9  x1    ascii/url /flutter/dart-ui/ChannelBuffers-class.html
+0x000e415d  x1    ascii/url /flutter/material/Scaffold/of.html
+0x0006a32c  x1    ascii    /interlace/1/format/jpg
+0x0013ed4d  x1    ascii    /objects/
+0x001673cb  x1    ascii/url /op/embed.aspx?src=
+0x0006bb26  x1    ascii/url /protocol.html?dt=
+0x0016442c  x1    ascii/url /rain
+0x000eadf8  x1    ascii/url /rain/
+0x00075924  x1    ascii/url /release/breaking-changes/network-policy-ios-android
+
+## [域名/主机] 共 38 条
+x2    api.flutter.dev
+x2    beian.miit.gov.cn
+x1    changjiang-exam.yuketang.cn
+x1    changjiang.yuketang.cn
+x1    dart.io
+x1    docs.flutter.dev
+x1    exam-env-example.rainclassroom.com
+x1    exam-envning.rainclassroom.com
+x1    examination.xuetangx.com
+x1    github.com
+x1    huanghe-exam.yuketang.cn
+x1    huanghe.yuketang.cn
+x1    meeting.tencent.com
+x1    n
+x1    oss-cn-beijing.aliyuncs.com
+x1    oss-cn-shenzhen.aliyuncs.com
+x1    pro.yuketang.cn
+x1    proexam.yuketang.cn
+x1    proxt-cdn.xuetangx.com
+x1    pub.dev
+x1    qn-c27.xuetangx.com
+x1    qn-help.yuketang.cn
+x2    qn-next.xuetangx.com
+x1    qn-scd0.yuketang.cn
+x8    qn-sfe.yuketang.cn
+x2    qn-st0.yuketang.cn
+x1    qn-v.yuketang.cn
+x1    tsinghua-exam.yuketang.cn
+x1    upload.qiniup.com
+x1    view.officeapps.live.com
+x1    www.ibm.com
+x7    www.w3.org
+x6    www.xuetangx.com
+x1    www.youtube.com
+x3    www.yuketang.cn
+x1    xt-envning.rainclassroom.com
+x1    ykt-env-example.rainclassroom.com
+x1    ykt-envning.rainclassroom.com
+
+## [完整 URL] 共 48 条
+0x000a1020  x1    ascii    http://www.ibm.com/data/dtd/v11/ibmxhtml1-transitional.dtd
+0x0017e3da  x1    ascii    http://www.w3.org/1998/Math/MathML
+0x0017dd58  x1    ascii    http://www.w3.org/1999/xhtml
+0x000e3dd3  x1    ascii    http://www.w3.org/1999/xlink
+0x000b48d1  x2    ascii    http://www.w3.org/2000/svg
+0x00190b8c  x1    ascii    http://www.w3.org/2000/xmlns/
+0x0009955d  x1    ascii    http://www.w3.org/XML/1998/namespace
+0x001572b9  x1    ascii    https://api.flutter.dev/flutter/dart-ui/ChannelBuffers-class.html
+0x000e415d  x1    ascii    https://api.flutter.dev/flutter/material/Scaffold/of.html
+0x000c0cee  x2    ascii    https://beian.miit.gov.cn
+0x000a3314  x1    ascii    https://changjiang-exam.yuketang.cn
+0x00075924  x1    ascii    https://docs.flutter.dev/release/breaking-changes/network-policy-ios-android
+0x00084440  x1    ascii    https://exam-env-example.rainclassroom.com
+0x00098b28  x1    ascii    https://exam-envning.rainclassroom.com
+0x0016d08f  x1    ascii    https://examination.xuetangx.com
+0x000eb59f  x1    ascii    https://github.com/dart-lang/language/issues/3488
+0x0019ab33  x1    ascii    https://huanghe-exam.yuketang.cn
+0x000ee238  x1    ascii    https://meeting.tencent.com/download-android.html
+0x000daf73  x1    ascii    https://n
+0x00064daf  x1    ascii    https://proexam.yuketang.cn
+0x0006d7f1  x1    ascii    https://proxt-cdn.xuetangx.com/fe-proxtassets/onlineexam/nocamera1.png
+0x001b551b  x1    ascii    https://pub.dev/
+0x000860d5  x1    ascii    https://qn-c27.xuetangx.com/
+0x0006bb26  x1    ascii    https://qn-help.yuketang.cn/protocol.html?dt=
+0x000670f9  x1    ascii    https://qn-next.xuetangx.com/
+0x0008d3ef  x1    ascii    https://qn-scd0.yuketang.cn/
+0x00199145  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5361skdeuu1dgr1apr1vedq.png
+0x000f7a85  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm537174erv9bersva1rdgs.png
+0x000841ce  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5371chsp651b4pej01ub11.png
+0x001af638  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5371iv85gffbok7u1jupu.png
+0x0014e86b  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5371q5bqcl15r8g0bfuhv.png
+0x000ddcc2  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5371uhuidb1kg91jpj9kc10.png
+0x000bd2f6  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm5373mrjrpaf29sa1f77r.png
+0x00167aed  x1    ascii    https://qn-sfe.yuketang.cn/o_1fl5tm537kvl10esc9dhbc1a06t.png
+0x001c56fd  x1    ascii    https://qn-st0.yuketang.cn/
+0x000f7331  x1    ascii    https://tsinghua-exam.yuketang.cn
+0x000e676c  x1    ascii    https://upload.qiniup.com
+0x001673cb  x1    ascii    https://view.officeapps.live.com/op/embed.aspx?src=
+0x0013e930  x1    ascii    https://www.xuetangx.com/
+0x0010d0bb  x1    ascii    https://www.xuetangx.com/mobile-app/private-url?platform=ykt&key=secret_url
+0x001004b6  x1    ascii    https://www.xuetangx.com/mobile-app/private-url?platform=ykt&key=user_protocol
+0x0016442c  x1    ascii    https://www.xuetangx.com/rain
+0x000eadf8  x1    ascii    https://www.xuetangx.com/rain/
+0x0018c028  x1    ascii    https://www.xuetangx.com/video-log/log/track/
+0x0013d7eb  x1    ascii    https://www.youtube.com/
+0x001752b3  x1    ascii    https://www.yuketang.cn
+0x0010e7d5  x1    ascii    https://www.yuketang.cn/mobile-app/private-url?platform=ykt&key=app_harmony_3rd
+0x000de6c3  x1    ascii    https://xt-envning.rainclassroom.com/video-log/log/track/
+

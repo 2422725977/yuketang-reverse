@@ -1,0 +1,50 @@
+# h5callers.py -- 目标 RVA 的调用点 (文件:行 | 调用者 RVA | 调用者)
+# 目标 RVA: 0xbd028c, 0xbd121c, 0xe2b8f4, 0xe953cc ; 调用点总数: 47 ; asm 文件数: 2356
+
+0xbd028c <- blutter_out/asm/rain/home/course/join_classroom_page.dart:4117 | caller_rva=0xfa21fc | _JoinClassroomPageState::[closure] void <anonymous closure>(dynamic, JoinClassroomBean) {
+0xbd028c <- blutter_out/asm/rain/home/scan_related/hms_scan_page.dart:7520 | caller_rva=0xccef68 | _HmsScanPageState::[closure] void <anonymous closure>(dynamic) {
+0xbd028c <- blutter_out/asm/rain/util/navigator_utils.dart:2471 | caller_rva=0xbcfdfc | NavigatorUtils::static _ goClassroomLogH5Page(/* No info */) {
+0xbd028c <- blutter_out/asm/rain/util/navigator_utils.dart:2745 | caller_rva=0xbd2b14 | NavigatorUtils::[closure] static Widget <anonymous closure>(dynamic, BuildContext) {
+0xbd121c <- blutter_out/asm/rain/core/app_constants.dart:6023 | caller_rva=0x11c3e80 | ::::[closure] static Widget <anonymous closure>(dynamic, dynamic, {required dynamic arguments}) {
+0xbd121c <- blutter_out/asm/rain/core/utils_function.dart:1587 | caller_rva=0xc269b0 | ::::[closure] static SafeArea <anonymous closure>(dynamic, BuildContext, (dynamic, (dynamic) => void) => void) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/chapter_widget.dart:2526 | caller_rva=0xf4db24 | _ChapterWidgetState::[closure] void <anonymous closure>(dynamic) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/chapter_widget.dart:3575 | caller_rva=0xf4df1c | _ChapterWidgetState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/chapter_widget.dart:4834 | caller_rva=0xf4f374 | _ChapterWidgetState::[closure] void <anonymous closure>(dynamic) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:10674 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:10925 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:11480 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:11538 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:4435 | caller_rva=0xe966e0 | _MyReceivePageState::[closure] Widget <anonymous closure>(dynamic, BuildContext) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:5143 | caller_rva=0xe96d64 | _MyReceivePageState::_ goWebPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:6112 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:7671 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:8218 | caller_rva=0xe98fe8 | _MyReceivePageState::[closure] Widget <anonymous closure>(dynamic, BuildContext) {
+0xbd121c <- blutter_out/asm/rain/home/lesson/more_widget.dart:3328 | caller_rva=0xe6d588 | MoreWidget::[closure] Null <anonymous closure>(dynamic, Object?) {
+0xbd121c <- blutter_out/asm/rain/home/lesson/more_widget.dart:3774 | caller_rva=0xe6d588 | MoreWidget::[closure] Null <anonymous closure>(dynamic, Object?) {
+0xbd121c <- blutter_out/asm/rain/message/widget/comment_list_widget.dart:5079 | caller_rva=0xe7ed98 | _CommentListWidgetState::_ goWebPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/message/widget/notification_list_widget_new.dart:6848 | caller_rva=0xe82f68 | _NotificationListWidgetState::_ goWebPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/message/widget/pm_list_widget.dart:3468 | caller_rva=0xe85298 | _PmListWidgetState::_ goWebPage(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/mine.dart:3697 | caller_rva=0xfceea0 | _MinePageState::_ help(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/mine.dart:4567 | caller_rva=0xfcf708 | _MinePageState::_ myCollect(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/mine.dart:5013 | caller_rva=0xfcfbd4 | _MinePageState::_ bindType(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/personal_information_detail_page.dart:1784 | caller_rva=0xfd7394 | _PageState::_ bindType(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/user_security_set.dart:4070 | caller_rva=0xfe6de8 | _SecuritySetState::_ enterTencentMeeting(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/user_set.dart:2801 | caller_rva=0xfe9228 | _UserSetState::_ privateProtocol(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/user_set.dart:3057 | caller_rva=0xfe94c4 | _UserSetState::_ protocol(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/mine/user_set.dart:3425 | caller_rva=0xfe9874 | _UserSetState::_ Shared_Information_List(/* No info */) {
+0xbd121c <- blutter_out/asm/rain/util/navigator_utils.dart:4000 | caller_rva=0xe2b8f4 | NavigatorUtils::static _ goH5Detail(/* No info */) {
+0xe2b8f4 <- blutter_out/asm/rain/files/pages/courseware_page.dart:9315 | caller_rva=0xe2b4f0 | _CourseWarePageState::_ clickItemUpload(/* No info */) {
+0xe2b8f4 <- blutter_out/asm/rain/files/pages/search_courseware_page.dart:7902 | caller_rva=0xf657dc | _SearchCourseWarePageState::_ clickItemUpload(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/chapter_widget.dart:3459 | caller_rva=0xf4df1c | _ChapterWidgetState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/chapter_widget.dart:3766 | caller_rva=0xf4df1c | _ChapterWidgetState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:10391 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:10650 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:11203 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_publish_page.dart:11456 | caller_rva=0xe94334 | _MyPublishPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:5987 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:6448 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:7547 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/my_receive_page.dart:7912 | caller_rva=0xe9709c | _MyReceivePageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/search_page.dart:4188 | caller_rva=0xf53408 | _SearchPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/dongtai/pages/search_page.dart:4641 | caller_rva=0xf53408 | _SearchPageState::_ goDetailPage(/* No info */) {
+0xe953cc <- blutter_out/asm/rain/home/teach_journal/lot_page.dart:1972 | caller_rva=0xfb8f74 | _LotPageState::[closure] Null <anonymous closure>(dynamic, int, int, String) {

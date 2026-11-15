@@ -100,3 +100,52 @@ adb pull /data/local/tmp/ykt_checkin.jsonl
 客户端绑定入口（全部只是 WebView 壳）：`/v/index/bindSchool_list`（mine/personal_information_detail/join_classroom_dialog/app_js_call_flutter）、`/static/html/tsinghua_bind.html`（check_code_page::goBindPage 0xaa7f64、wechat::goBindPage 0xc06514）。
 
 若要看运行时值，可挂：`_MyInfoPageState::_postUserInfo` RVA 0xfd37ac（请求侧）、`_SearchInputWidgetState::postSearchSchool` RVA 0xc9054c（请求侧）、`_$UserInfoDetailDataFromJson`（响应侧，解析 `school/school_number`）。
+
+## 7. JS 桥 / H5 URL / Deeplink 探针 `hooks/ykt_bridge_probe.js`
+
+```bash
+frida -U -f com.xuetangx.ykt -l ykt_bridge_probe.js --no-pause
+# 分组（写进日志的 exp 字段）：rpc.exports.markExp("H1")
+# 日志：/data/local/tmp/ykt_bridge.jsonl  每行 {ts, exp, fn, a1, a2, ret}
+adb shell "run-as com.xuetangx.ykt cat /data/local/tmp/ykt_bridge.jsonl" 2>/dev/null || adb pull /data/local/tmp/ykt_bridge.jsonl
+```
+
+12 个挂点（全部带 Dart AOT prologue guard 双字节校验，版本不符即打印 `[GUARD-FAIL]` 并跳过）：
+
+| 挂点 | RVA | guard | 作用 |
+| --- | --- | --- | --- |
+| `JsCallFlutter::dispatchAction` | 0xba725c | ef4104d1 | 主 JS 桥入口，a1 = H5 送来的整包 JSON |
+| `ShareJsCallFlutter::dispatchAction` | 0xc7de84 | efa102d1 | 分享页桥 |
+| `_ExamPageState::dispatch(js)` | 0xc97744 | efe103d1 | 考试页桥（16 action） |
+| `_StudyPartnerWebviewState::dispatch` | 0xd5e07c | efc103d1 | 学伴页桥（10 action） |
+| `DataUtil::getJournalH5Url` | 0xe953cc | ef8101d1 | 每次打开云侧 H5 生成的 URL（**返回值**已解码） |
+| `getWebViewPageWidget` | 0xbd121c | ef8105d1 | 真正打开 WebView 的参数 |
+| `JsCallFlutter::getTokenData` | 0xbc5024 | ef6105d1 | OSS 直传凭据 |
+| `JsCallFlutter::uploadFile` | 0xbc676c | efc100d1 | 上传回调 |
+| `JsCallFlutter::getAliOssConfig` | 0xbc630c | ef8101d1 | ALI OSS 配置（tokenUrl 来自 H5） |
+| `JsCallFlutter::postHomeworkDataToJS` | 0xbc6004 | ef0101d1 | 作业回填 |
+| `_MyHomePageState::processLinkParams` | 0xc20698 | efc100d1 | deeplink `app://yuketang` 解析 |
+| `LogUtils::i` | 0x7da6f4 | ef2100d1 | 判 `LogUtils._debug` 是否开着（开着则 logcat 里就有 `======js调用========` 原文） |
+
+读数要点：`a1`/`a2` 是字符串时直接给出文本；是对象时打印 `<cid=N>`（Dart 类型 id）。**若 `LogUtils._debug` 为 true，直接 `adb logcat | grep "js调用"` 即可拿到同一份 H5 包，不必上 Frida。**
+
+## 8. WebSocket 探针 `hooks/ykt_ws_probe.js`
+
+```bash
+frida -U -f com.xuetangx.ykt -l ykt_ws_probe.js --no-pause
+# 日志：/data/local/tmp/ykt_ws.jsonl  每行 {ts, dir(IN|OUT|META), fn, op, raw, url}
+```
+
+7 个挂点：`WSConnector` 构造 0xc15134 / `connect` 0xc15220 / `send` 0x91e988 / `ReceiverProcesser::process` 0x142515c / `RemoteControlProcesser::process` 0x143a028 / `_tryReconnectAfterDelay` 0xc191f8 / `_teardownChannel` 0xc1905c。
+配合 `../replay/ykt_client.py ws`（纯 Python 侧，可注入教师专属 op）可交叉验证"服务端是否按角色过滤"（报告 §13/§19 的 unverified 1-2）。
+
+## 9. 四个探针的分工
+
+| 探针 | 点数 | 覆盖 |
+| --- | --- | --- |
+| `ykt_hooks.js` | 25 | 四模块全景（签到/作业/成绩/作答 + 监考 + 反作弊） |
+| `ykt_checkin_probe.js` | 13 | 签到：请求侧入口与裁决字段 + 响应 bean |
+| `ykt_bridge_probe.js` | 12 | H5↔原生桥、H5 URL、deeplink、OSS 直传 |
+| `ykt_ws_probe.js` | 7 | WebSocket 双向帧 |
+| `ykt_beat_probe.js` | 8 | 学习时长心跳（/mobile-app/video-log/heartbeat/）：组包、本地库、补传、直播与音频通道 |
+| `ykt_proctor_probe.js` | 10 | 考试监考/反作弊：七个 action 码上报、分屏监听、抓拍上传、光速虚拟机检测 |
