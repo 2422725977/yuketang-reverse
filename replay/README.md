@@ -32,7 +32,7 @@ python3 ykt_client.py --uid 123456 ws --lesson-id 999 --send-hello \
 * Cookie 形如 `csrftoken=..; sessionid=..; sid=..`，**服务端随时可轮换**——脚本每个响应后自动吸收；
 * 响应业务码 **100000** = 会话失效（`setReLoginCode` 0x145137c），脚本会打印 `!! 业务码 100000` 并中止回放。
 
-## 2. ykt_scenarios.py — 35 个场景（四模块 + 实验组）
+## 2. ykt_scenarios.py — 47 个场景（四模块 + 实验组 T/P）
 
 ```bash
 python3 ykt_scenarios.py list
@@ -49,6 +49,8 @@ python3 ykt_scenarios.py jsonl runs/E.jsonl --group E     # E/A/B/C/D 组可直�
 | C | 课程作答：问题作答 / 抢答 / 弹幕 / 视频题 |
 | D | 成绩写入：互评分 / 教师评分 / 明细 |
 | W | WebSocket `hello`（学生/教师）与 6 个教师专属 op 注入 |
+| T | 学习时长心跳（报告 §21）：T0 基线 / T1 只回拨 ts / T2 放大 sp·d / T3 同 sq 重放 / T4 高频连发 / T5 伪造课堂归属 |
+| P | 考试监考上报（报告 §22）：P0 action24 基线 / P1 action16 / P2 action20 / P3 action96+vm_report / P4 七牛 token / P5 人脸比对 |
 
 ## 3. checkin_replay.sh / checkin_diff.py（早期脚本，shell + 差异比对）
 

@@ -113,6 +113,52 @@ sc("D-teacher-score-detail", "D", "POST", "/api/v3/lesson/problem/teacher/score-
 sc("D-score-detail", "D", "GET", "/api/v3/lesson/problem/score-detail?problem_id=@@{PROBLEM_ID}",
    None, "YuKetang::scoreDetail 0xd59ed0")
 
+# ---------- 学习时长心跳（报告 §21 板块 G） ----------
+# 单条 HeartBeat 22 键（字段偏移↔键名已逐条验证）。变量: @@{TS_NOW} @@{LESSON_ID} @@{CLASSROOM_ID} @@{SKUID}
+def _beat(ts="@@{TS_NOW}", sp=120.0, d=600, sq=3, cid="@@{CLASSROOM_ID}", lid="@@{LESSON_ID}"):
+    return {"id": "@@{BEAT_ID}", "ts": ts, "i": 5, "et": "", "cp": 0, "fp": 0, "tp": 0,
+            "sp": sp, "c": "video", "v": "", "cc": "", "d": d, "pg": "play",
+            "sq": sq, "u": "@@{UID}", "classroomid": cid, "lesson_id": lid, "t": "video",
+            "p": "android", "lob": "ykt", "n": "", "skuid": "@@{SKUID}"}
+
+sc("T0-heartbeat-baseline", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat()]},
+   "基线：正常播放中的一拍（ts=当前秒级、sp=真实播放位置）")
+sc("T1-heartbeat-ts-backdate", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat(ts="@@{TS_BACKDATE}")]},
+   "单变量：只把 ts 回拨 3600s，其余与 T0 一致 —— 观察服务端是否接受并计入时长")
+sc("T2-heartbeat-inflate", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat(sp=3600.0, d=7200)]},
+   "单变量：只把 sp/d 放大（播放位置与时长），ts 不变")
+sc("T3-heartbeat-replay-same-sq", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat(), _beat()]},
+   "重放：同 id/同 sq 两条同拍连发 —— 观察是否去重（对照 T4 高频不同 id）")
+sc("T4-heartbeat-burst", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat(ts="@@{TS_BURST}")]},
+   "高频连发：该场景需连续调用 N 次（每次 TS_BURST 递增 1s、BEAT_ID 变化）")
+sc("T5-heartbeat-forged-binding", "T", "POST", "/mobile-app/video-log/heartbeat/",
+   {"heart_data": [_beat(cid="@@{OTHER_CLASSROOM_ID}", lid="@@{OTHER_LESSON_ID}")]},
+   "单变量：只改 classroomid/lesson_id 归属 —— 观察是否落进他人课堂时长")
+
+# ---------- 考试监考上报（报告 §22 板块 H） ----------
+sc("P0-monitor-feed-baseline", "P", "POST", "/online_proctor/stu/monitor/feed/add",
+   {"exam_id": "@@{EXAM_ID}", "action": 24},
+   "基线：action 24（切换页面/退出考试页）；端点 body 只有 exam_id + action")
+sc("P1-monitor-feed-resume", "P", "POST", "/online_proctor/stu/monitor/feed/add",
+   {"exam_id": "@@{EXAM_ID}", "action": 16},
+   "单变量：action 16（回到前台）")
+sc("P2-monitor-feed-multiwindow", "P", "POST", "/online_proctor/stu/monitor/feed/add",
+   {"exam_id": "@@{EXAM_ID}", "action": 20},
+   "单变量：action 20（分屏/多窗口）")
+sc("P3-monitor-feed-vm", "P", "POST", "/online_proctor/stu/monitor/feed/add",
+   {"exam_id": "@@{EXAM_ID}", "action": 96, "vm_report": "@@{VM_REPORT_JSON}"},
+   "action 96（虚拟机）：vm_report=原生报告 jsonEncode；注意 Java schemaVersion=1 vs Dart 要求 2，客户端侧不可达")
+sc("P4-idphoto-upload-token", "P", "GET", "/idphoto/upload/token",
+   None, "抓拍/证件照七牛 token（需 X-UID + Cookie）")
+sc("P5-face-compare", "P", "POST", "/online_proctor/stu/face-compare",
+   {"exam_id": "@@{EXAM_ID}", "has_camera": "1", "image_url": "@@{IMAGE_URL}"},
+   "人脸比对校验：三键全部客户端构造（image_url 为七牛直传结果）")
+
 # ---------- WebSocket 注入（报告 §12 的 unverified 项） ----------
 sc("W-hello-student", "W", "WS", "hello",
    {"op": "hello", "lessonid": "@@{LESSON_ID}", "userid": "@@{UID}", "role": "student", "auth": "@@{AUTH}"},
