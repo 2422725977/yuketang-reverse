@@ -11,7 +11,7 @@
  *
  * guard 用字节十六进制串比较（文件字节顺序），地址=base+RVA，RVA 已由 capstone 逐条校验过。
  */
-const CFG = { module: "libapp.so", out: "/data/local/tmp/ykt_checkin.jsonl" };
+const CFG_CI = { module: "libapp.so", out: "/data/local/tmp/ykt_checkin.jsonl" };
 
 /* 请求侧：谁把签到请求发出去 */
 const REQ = [
@@ -41,7 +41,7 @@ let fd = null;
 let seq = 0;
 
 function resolveBase() {
-  base = Module.findBaseAddress(CFG.module) || Process.findModuleByName(CFG.module)?.base || null;
+  const _m = Process.findModuleByName(CFG_CI.module); base = _m ? _m.base : null;
   return base;
 }
 function hexBytes(a, n) {
@@ -56,7 +56,7 @@ function guardOk(a, g) {
 }
 function openLog() {
   if (fd) return;
-  try { fd = new File(CFG.out, "a"); } catch (e) { console.log("[warn] 无法写 " + CFG.out + "：" + e); }
+  try { fd = new File(CFG_CI.out, "a"); } catch (e) { console.log("[warn] 无法写 " + CFG_CI.out + "：" + e); }
 }
 function record(side, name, values, ret) {
   const line = { seq: ++seq, t: Date.now(), exp: exp, side: side, fn: name, args: values };
@@ -100,7 +100,7 @@ function attach(t, side) {
   });
 }
 function main() {
-  console.log("[probe] base=" + base + " helpers=" + (HAS_BLUTTER_HELPERS ? "blutter" : "raw") + " out=" + CFG.out);
+  console.log("[probe] base=" + base + " helpers=" + (HAS_BLUTTER_HELPERS ? "blutter" : "raw") + " out=" + CFG_CI.out);
   console.log("[probe] 当前实验号 exp=" + exp + "（REPL 里 setExp(\"E1\") 可切换）");
   REQ.forEach(t => attach(t, "REQ"));
   RES.forEach(t => attach(t, "RES"));

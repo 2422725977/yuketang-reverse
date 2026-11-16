@@ -39,11 +39,12 @@
 | §22 | H 监考与反作弊 | action 码封闭 `{16,20,24,60,62,64,96}` 且全部客户端驱动、无第二来源；光速检测只有 3 条规则、**无 frida/xposed 关键字**，且 `schemaVersion` Java=1 vs Dart=2 → **action 96 不可达**；截屏判定是 MediaStore 启发式 |
 | §23 | 课程列表端点 | `GET /v/course_meta/learning_list/` 取 classroom_id/course_id；`/v2/lesson/student/` 被证伪为 H5 页面路径；两套鉴权差异首次定位 |
 | §24 | **实测抓包**（§24，observed） | 自有 AVD 上 mitmproxy 反向代理抓 3 批流量、**46 条唯一端点**；两条鉴权链（app vs web）；成绩链三个 GET 明文可读：签到权重 0.3 / 异常签到 ×0.5 / 4 单元 ×7.5 = 30 分；绑定状态权威判定在 `/pc/**` |
+| §25 | **扫码/动态码/过期码实测**（observed） | 二维码只承载一个字符串（19 位 lessonId 或 ≤11 位旧码，按长度分流两个端点）、无签名无时间戳、客户端无有效期判断；**过期二维码实测 `{"code":50004,"msg":"LESSON_END"}`**；`/api/lesson/web_check_in` 校验暗号本身（10037）；**网关只认明文 `sessionid` 头**，补上它宿主直连也 200 |
 
 ## 仓库结构
 
 ```
-report/   雨课堂_逆向分析报告.md        # 主交付物：24 章（§1-§12 主分析，§13-§22 深化板块，§23-§24 端点定位与实测抓包），全部标注 observed/inferred/unverified
+report/   雨课堂_逆向分析报告.md        # 主交付物：25 章（§1-§12 主分析，§13-§22 深化板块，§23-§24 端点定位与实测抓包，§25 扫码/动态码/过期码实测），全部标注 observed/inferred/unverified
           _board_ws.md                 # 板块 A：WebSocket 协议（出站/入站 op 全表、信封、重连）
           _board_h5.md                 # 板块 B：云侧 H5 路径全表与归属（355 条路径 / 18 个 H5）
           _board_jsbridge.md           # 板块 C：JS 桥 4 个 dispatcher 与 action 全表
@@ -64,6 +65,7 @@ replay/   ykt_client.py                # 会话客户端（cookie 轮换 / 10000
           checkin_replay.sh            # 四种签到端点重放（plain|web|loc-get|loc-submit|all）
           checkin_diff.py              # 两次实验的响应字段差异对比（白名单键）
           bind_replay.sh               # 身份绑定 B0-B4 实验
+          qr_checkin.sh                # 扫码/暗号签到端点探测（expired|legacy-web|legacy-wx|dynamic，写操作需 --yes）
           README.md                    # 两工具用法与会话语义
 tools/    guard_audit.py               # 审计全部探针的挂点 guard（当前 75 点 / 0 不一致）
           ws_lits.py / ws_proc.py / ws_inbound*.py / ws_model*.py   # WS op 与模型字段提取
@@ -74,7 +76,9 @@ tools/    guard_audit.py               # 审计全部探针的挂点 guard（当
           addr_extract*.py / sig*.py   # 从 blutter 反汇编提取函数 RVA、签名、prologue guard 字节
           verify_prologue.py           # capstone 校验文件偏移处的指令与 asm 是否逐条一致
           fj_guard.py                  # 反编译产物完整性辅助
-live/     README.md                    # 实测流水（请求表、两套鉴权、判读与下一步）
+          dev_replay.py                # 设备内/宿主已鉴权重放（头模板取自 mitm flows 最近一条 App 请求；--host 宿主直连）
+live/     README.md                    # 实测流水（请求表、两套鉴权、已鉴权重放结果表、判读与下一步）
+          replay/*.json                # §25 八条实测请求的 url/method/body/status/headers_sent/响应原文（已脱敏）
           capture{1,2,3}/index.tsv     # 三批抓包的流索引（编号/METHOD/URL/状态/长度）
           evidence/                    # 4 组关键流的 req/res 原文（cookie/CSRF/手机号已脱敏）
           shots/                       # App 实况截图（课程页/课堂记录/成绩单/空态页）
@@ -118,7 +122,16 @@ python3 tools/mitm_dump.py /tmp/mitm/flows.mitm live/capture4      # -> req.txt 
 #    5.4 收尾：撤销 DNAT、删掉系统 CA，避免污染后续实验
 adb shell su -c 'iptables -t nat -D OUTPUT -p tcp -d 198.18.2.97 --dport 443 -j DNAT --to-destination 10.0.2.2:8888'
 adb shell rm /system/etc/security/cacerts/c8750f0d.0
+
+# 6) 已鉴权重放：测扫码/暗号/过期码（报告 §25）
+#    头模板直接从抓包 flows 里取最近一条 App 自带请求 —— 服务端每次响应都轮换 sessionid，落盘 cookie 常是旧值
+python3 tools/dev_replay.py --host --path /api/v3/lesson/location-checkin/eligibility
+python3 tools/dev_replay.py --host --method POST --path /api/v3/lesson/checkin \
+  --body '{"lessonId":"<LESSON_ID>","source":42,"joinIfNotIn":true}'      # 过期码 -> {"code":50004,"msg":"LESSON_END"}
+./replay/qr_checkin.sh expired --yes                                       # 同一实验的场景化入口
 ```
+
+**关键：网关只认明文 `sessionid` 请求头**（`App::getInterceptor` 0x1450ddc 把 Cookie 值抄进同名头）。缺它 → `401` 空体或 `{"code":50000,"msg":"UNAUTHENTICATED"}`；补上它 → 宿主同 IP 同 Cookie 也 `200 + code:0`。不存在签名、设备指纹或 IP 绑定（observed，§25.5）。
 
 ### 两条鉴权链（手工复现 401 的唯一原因）
 | | Dart 原生 | H5 / WebView |

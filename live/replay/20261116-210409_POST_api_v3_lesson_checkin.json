@@ -1,0 +1,31 @@
+{
+  "url": "https://www.yuketang.cn/api/v3/lesson/checkin",
+  "method": "POST",
+  "body": {
+    "lessonId": "1820276486008339584",
+    "source": 42,
+    "joinIfNotIn": true
+  },
+  "status": "200",
+  "template": "https://www.yuketang.cn/api/v3/lesson/checkin",
+  "headers_sent": {
+    "user-agent": "Android",
+    "x-csrftoken": "<REDACTED>",
+    "brand": "Android Android SDK built for arm64",
+    "buildnumber": "1900",
+    "x-client": "app",
+    "xtua": "client=app&tag=1.3.6&platform=Android",
+    "systemversion": "11",
+    "incremental": "10160917",
+    "accept": "application/json",
+    "version": "1.3.6",
+    "cookie": "<REDACTED>",
+    "isphysicaldevice": "false",
+    "xtbz": "ykt",
+    "x-uid": "100254372",
+    "sessionid": "<REDACTED>",
+    "content-type": "application/x-www-form-urlencoded",
+    "content-length": "65"
+  },
+  "resp": "{\"code\":50004,\"msg\":\"LESSON_END\",\"data\":{}}"
+}

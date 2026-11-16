@@ -1,0 +1,25 @@
+{
+  "url": "https://www.yuketang.cn/api/v3/lesson/location-checkin/eligibility",
+  "method": "GET",
+  "body": null,
+  "status": "200",
+  "headers_sent": {
+    "user-agent": "Android",
+    "x-csrftoken": "<REDACTED>",
+    "brand": "Android Android SDK built for arm64",
+    "uuid": "",
+    "buildnumber": "1900",
+    "x-client": "app",
+    "xtua": "client=app&tag=1.3.6&platform=Android",
+    "systemversion": "11",
+    "incremental": "10160917",
+    "accept": "application/json",
+    "version": "1.3.6",
+    "cookie": "<REDACTED>",
+    "isphysicaldevice": "false",
+    "xtbz": "ykt",
+    "x-uid": "100254372",
+    "sessionid": "<REDACTED>"
+  },
+  "resp": "{\"code\":50000,\"msg\":\"UNAUTHENTICATED\",\"data\":\"\"}"
+}

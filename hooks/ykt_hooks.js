@@ -62,7 +62,7 @@ const HAS_BLUTTER_HELPERS = (typeof getTaggedObjectValue === "function") && (typ
 let base = null;
 
 function resolveBase() {
-  base = Module.findBaseAddress(CFG.module) || Process.findModuleByName(CFG.module)?.base || null;
+  const _m = Process.findModuleByName(CFG.module); base = _m ? _m.base : null;
   return base;
 }
 

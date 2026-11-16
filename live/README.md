@@ -40,9 +40,33 @@
 
 ## 追加：用户提供课程页 URL（2026-11-16 20:17）
 
-- URL: https://www.yuketang.cn/lesson/fullscreen/v3/<PHONE>08339584
-- 解析：**lessonId = <PHONE>08339584**（19 位雪花号，URL 第四段即 lesson 主键）；该路径是网页版全屏课堂页，v3 为版本号。
+- URL: https://www.yuketang.cn/lesson/fullscreen/v3/1820276486008339584
+- 解析：**lessonId = 1820276486008339584**（19 位雪花号，URL 第四段即 lesson 主键）；该路径是网页版全屏课堂页，v3 为版本号。
 - 会话状态：再次探活 /v/course_meta/user_info → 仍为 {"msg":"","code":50000,"data":{}}，**会话仍是死的**，/api/v3/lesson/location-checkin/eligibility 无法调用。
 - 已备好只读探针脚本 replay/eligibility_probe.sh（三步：/v/ 探活 → learning_list 取 classroom_id → eligibility?lessonId=…；任一步 50000/UNAUTHENTICATED 立即退出；末尾按白名单字段打印摘要）。
 - 待用户提供：重新扫码后的 sessionid（+ csrftoken），或连 adb 走 Frida 只读探针。
+
+
+---
+
+## 追加：设备内/宿主已鉴权重放（2026-11-16 21:00–21:05，全部 observed）
+
+**通道**：`tools/dev_replay.py`（头模板取自 mitm flows 里最近一条 App 自带请求）
+- 设备内：static-curl（musl aarch64）push 到 `/data/local/tmp/curl`，`--connect-to www.yuketang.cn:443:10.0.2.2:8888` 走 mitmproxy
+- 宿主：`--host` 直连（同样 200，证明无 IP/设备绑定）
+
+**硬结论**：网关只认 `sessionid` 明文请求头（App::getInterceptor 0x1450ddc 把 Cookie 值抄进头）。此前所有 401/50000 都是缺这个头。
+
+| 时间 | 请求 | HTTP | 响应 |
+|---|---|---|---|
+| 21:03:02 | GET /api/v3/lesson/location-checkin/eligibility | 401 | （缺 sessionid 头） |
+| 21:03:49 | GET /api/v3/lesson-summary/query-lecture-note?lesson_id=1820276486008339584 | 200 | `{"code":0,"msg":"OK","data":{"list":[],"taskStatus":-1,"studentVisible":1}}` |
+| 21:03:53 | POST /api/v3/lesson/checkin | 500 | body 未加引号导致 "Failed to decode…" |
+| 21:03:59 | POST /api/v3/lesson/checkin | 400 | `{"code":50400,"msg":"BAD_REQUEST"}`（content-type 缺） |
+| **21:04:09** | **POST /api/v3/lesson/checkin** `{"lessonId":"1820276486008339584","source":42,"joinIfNotIn":true}` | **200** | **`{"code":50004,"msg":"LESSON_END","data":{}}`** |
+| 21:04:51 | POST /api/lesson/web_check_in `{"invite_code":"...","source":46}` | 200 | `{"msg":"课堂暗号输入错误，请重新输入或扫码加入。","code":10037}` |
+| 21:04:56 | POST /wxapi/lesson_check_in `{"lesson_id":"...","source":42,"action":"scan","userid":100254372}` | 500 | `{"errorcode":400,"errormsg":"Internal Server Error"}` |
+| 21:05:34 | GET /api/v3/classroom/on-lesson-upcoming-exam | 200 | `{"code":0,"msg":"OK","data":{"onLessonClassrooms":[],"upcomingExam":[]}}` |
+
+原始请求/响应：`live/replay/*.json`（已脱敏 cookie/x-csrftoken/sessionid）。分析见报告 §25。
 
