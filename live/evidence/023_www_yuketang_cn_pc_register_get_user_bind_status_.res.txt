@@ -1,0 +1,16 @@
+200 OK
+Date: Mon, 16 Nov 2026 12:47:25 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+Vary: Accept-Language, Cookie
+Content-Language: zh-cn
+Set-Cookie: django_language=zh-cn; Path=/; SameSite=None; Secure
+x-envoy-upstream-service-time: 12
+x-envoy-decorator-operation: blended-learning-rain-django-http.rain.svc.cluster.local:39154/*
+Access-Control-Allow-Origin: file://
+Access-Control-Allow-Methods: PUT,POST,GET,DELETE,OPTIONS
+Access-Control-Allow-Headers: User-Agent, Referer, Content-Type, Range, Content-Length, Authorization, Accept
+Access-Control-Allow-Credentials: true
+
+{"msg": "", "data": {"email_status": {"no_bind": true, "email": null}, "password_status": false, "nickname": "xi", "avatar": "<AVATAR_URL>", "phone_status": {"phone": "+8615736131929", "no_bind": false}}, "success": true}

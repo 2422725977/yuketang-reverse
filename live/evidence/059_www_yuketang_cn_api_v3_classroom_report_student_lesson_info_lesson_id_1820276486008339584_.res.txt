@@ -1,0 +1,13 @@
+200 
+date: Mon, 16 Nov 2026 12:49:02 GMT
+content-type: application/json; charset=utf-8
+content-length: 457
+xutangx-platform: cube
+x-envoy-upstream-service-time: 34
+x-envoy-decorator-operation: cube-api-gateway.rain.svc.cluster.local:8080/*
+access-control-allow-origin: file://
+access-control-allow-methods: PUT,POST,GET,DELETE,OPTIONS
+access-control-allow-headers: User-Agent, Referer, Content-Type, Range, Content-Length, Authorization, Accept
+access-control-allow-credentials: true
+
+{"code":0,"msg":"OK","data":{"lessonId":"1820276486008339584","teacherIdentityId":96462582,"teacherName":"郑涛","lessonName":"11月16日授课（2）","lessonType":0,"start":1794830666683,"end":1794831657412,"classroomId":33841331,"courseId":6061936,"classroomName":"3","courseName":"语文","activityId":59439938,"skuId":17284405,"hasLive":false,"hasFakeLive":false,"isScore":true,"identityId":100254372,"uvid":0,"oldVersion":false,"presentationIds":[]}}

@@ -37,11 +37,13 @@
 | §20 | F 路由/环境/域名 | 28 条路由、29 个域（含测试族 envning）、**4 个后端重绑出口**（其中 deeplink 与 JS 桥运行期可达且无白名单） |
 | §21 | G 学习时长心跳 | `POST /mobile-app/video-log/heartbeat/`，22 字段全客户端构造（`ts` 本地时钟、`sp` 播放位置），**无服务端时钟校准**；失败落 `heartbeat.db` 补传 |
 | §22 | H 监考与反作弊 | action 码封闭 `{16,20,24,60,62,64,96}` 且全部客户端驱动、无第二来源；光速检测只有 3 条规则、**无 frida/xposed 关键字**，且 `schemaVersion` Java=1 vs Dart=2 → **action 96 不可达**；截屏判定是 MediaStore 启发式 |
+| §23 | 课程列表端点 | `GET /v/course_meta/learning_list/` 取 classroom_id/course_id；`/v2/lesson/student/` 被证伪为 H5 页面路径；两套鉴权差异首次定位 |
+| §24 | **实测抓包**（§24，observed） | 自有 AVD 上 mitmproxy 反向代理抓 3 批流量、**46 条唯一端点**；两条鉴权链（app vs web）；成绩链三个 GET 明文可读：签到权重 0.3 / 异常签到 ×0.5 / 4 单元 ×7.5 = 30 分；绑定状态权威判定在 `/pc/**` |
 
 ## 仓库结构
 
 ```
-report/   雨课堂_逆向分析报告.md        # 主交付物：22 章（§1-§12 主分析，§13-§22 深化板块），全部标注 observed/inferred/unverified
+report/   雨课堂_逆向分析报告.md        # 主交付物：24 章（§1-§12 主分析，§13-§22 深化板块，§23-§24 端点定位与实测抓包），全部标注 observed/inferred/unverified
           _board_ws.md                 # 板块 A：WebSocket 协议（出站/入站 op 全表、信封、重连）
           _board_h5.md                 # 板块 B：云侧 H5 路径全表与归属（355 条路径 / 18 个 H5）
           _board_jsbridge.md           # 板块 C：JS 桥 4 个 dispatcher 与 action 全表
@@ -72,6 +74,11 @@ tools/    guard_audit.py               # 审计全部探针的挂点 guard（当
           addr_extract*.py / sig*.py   # 从 blutter 反汇编提取函数 RVA、签名、prologue guard 字节
           verify_prologue.py           # capstone 校验文件偏移处的指令与 asm 是否逐条一致
           fj_guard.py                  # 反编译产物完整性辅助
+live/     README.md                    # 实测流水（请求表、两套鉴权、判读与下一步）
+          capture{1,2,3}/index.tsv     # 三批抓包的流索引（编号/METHOD/URL/状态/长度）
+          evidence/                    # 4 组关键流的 req/res 原文（cookie/CSRF/手机号已脱敏）
+          shots/                       # App 实况截图（课程页/课堂记录/成绩单/空态页）
+tools/    mitm_dump.py                 # 把 mitmproxy flows.mitm 展开成 req.txt/res.txt/index.tsv
 artifacts/ paths.txt                   # 接口路径全集（156 条）
           dartfiles.txt                # Dart 源码路径全集（2880 条）
           h5paths.txt / h5paths_lits.txt / h5asm_ctx.txt / h5callers*.txt  # H5 路径与调用点原始清单
@@ -96,7 +103,29 @@ frida -U -f com.xuetangx.ykt -l blutter_out/blutter_frida.js -l hooks/ykt_hooks.
 
 # 4) 接口重放（需要自己的测试账号 Cookie）
 cd replay && BASE_URL=https://www.yuketang.cn COOKIE='csrftoken=..; sessionid=..' X_CSRF=.. X_UID=.. ./checkin_replay.sh all
+
+# 5) 实测抓包（自有设备/模拟器，只读观测；报告 §24）
+#    5.1 装 mitmproxy 并把 CA 装成系统证书（本 App 无证书锁定，系统 CA 即可）
+mitmdump -p 8888 --mode reverse:https://www.yuketang.cn -w /tmp/mitm/flows.mitm --set flow_detail=1
+openssl x509 -in ~/.mitmproxy/mitmproxy-ca-cert.pem -subject_hash_old -noout      # -> c8750f0d
+adb root && adb remount
+adb push ~/.mitmproxy/mitmproxy-ca-cert.pem /system/etc/security/cacerts/c8750f0d.0
+adb shell chmod 644 /system/etc/security/cacerts/c8750f0d.0 && adb reboot
+#    5.2 设备内引流（198.18.2.97 换成宿主 dig +short www.yuketang.cn 的结果）
+adb shell su -c 'iptables -t nat -A OUTPUT -p tcp -d 198.18.2.97 --dport 443 -j DNAT --to-destination 10.0.2.2:8888'
+#    5.3 操作 App（只点只读页面），然后解析
+python3 tools/mitm_dump.py /tmp/mitm/flows.mitm live/capture4      # -> req.txt / res.txt / index.tsv
+#    5.4 收尾：撤销 DNAT、删掉系统 CA，避免污染后续实验
+adb shell su -c 'iptables -t nat -D OUTPUT -p tcp -d 198.18.2.97 --dport 443 -j DNAT --to-destination 10.0.2.2:8888'
+adb shell rm /system/etc/security/cacerts/c8750f0d.0
 ```
+
+### 两条鉴权链（手工复现 401 的唯一原因）
+| | Dart 原生 | H5 / WebView |
+| --- | --- | --- |
+| 标识 | `x-client: app`、`xtbz: ykt`、`version`、`xtua`、`brand`、`buildnumber`、`systemversion`、`incremental`、`isphysicaldevice`、`uuid` | `x-client: web`、`xt-agent: web`、`classroom-id`、`university-id`、`uv-id`、`x-requested-with`、`referer` |
+| 鉴权 | `x-uid` + 会话 cookie（POST 另有 `X-CSRFToken`） | 会话 cookie + `x-csrftoken` |
+| UA | `Android` | Chromium `… flutterApp Mobile flutterApp` |
 
 **本仓库不含 APK、不含 `libapp.so`、不含反编译产物树**（版权与体积原因）：只放分析报告、脚本与路径清单，样本请自备并用上表 sha256 对照。
 

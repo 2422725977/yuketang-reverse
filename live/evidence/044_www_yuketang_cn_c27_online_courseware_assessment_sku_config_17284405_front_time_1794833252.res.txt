@@ -1,0 +1,14 @@
+200 
+date: Mon, 16 Nov 2026 12:47:32 GMT
+content-type: application/json
+vary: Accept-Language, Cookie
+content-language: zh-hans
+allow: GET, POST, HEAD, OPTIONS
+x-envoy-upstream-service-time: 16
+x-envoy-decorator-operation: courseware27-gunicorn-http.rain.svc.cluster.local:39176/*
+access-control-allow-origin: file://
+access-control-allow-methods: PUT,POST,GET,DELETE,OPTIONS
+access-control-allow-headers: User-Agent, Referer, Content-Type, Range, Content-Length, Authorization, Accept
+access-control-allow-credentials: true
+
+{"msg":"","data":{"lesson_problem_percent":0.5,"cards_read_percent":0.7,"ai_usage_interval":[[0,0],[100,100]],"video_avail_percent":90,"lesson_group_discussion_percent":0,"video_drag":false,"percent":0,"live_and_replay_read_reach_full_percent":0.6,"lesson_get_checkin_score_when_checkin_exception":0,"lesson_sigin_percent":0.3,"cards_problem_percent":0.3,"lesson_addition":1,"tougao":0,"danmu":0,"lesson_live_and_replay":0,"lesson_get_checkin_score_by_watch_replay":0,"cards_read_reach_full_percent":0.9,"lesson_quiz_percent":0.2,"lesson_abnormal_sigin_percent":0.5},"success":true}
